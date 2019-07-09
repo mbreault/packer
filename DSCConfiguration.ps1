@@ -2,11 +2,7 @@
 
 configuration webConfiguration
 {
-    param (
-        [Parameter(Mandatory = $False)]
-        [String]$PackageLocation
-    )
-
+   
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     # Import-DscResource -ModuleName WebAdministration
 
@@ -66,38 +62,6 @@ configuration webConfiguration
         WindowsFeature ApplicationInitialization {
             Name   = "Web-AppInit"
             Ensure = "Present"
-        }
-
-        if (![String]::IsNullOrEmpty($websitePackageUri)) {
-
-            # Download and unpack the website into the default website
-            Script DeployWebPackage {
-                GetScript  = {@{Result = "DeployWebPackage"}}
-                TestScript = {
-                    return Test-Path -Path "C:\WebApp\Site.zip";
-                }
-                SetScript  = {
-
-                    if (!(Test-Path -Path "C:\WebApp")) {
-                        New-Item -Path "C:\WebApp" -ItemType Directory -Force | Out-Null;
-                    }
-
-                    $dest = "C:\WebApp\Site.zip" 
-
-                    if (Test-Path -Path "C:\inetpub\wwwroot") {
-                        Remove-Item -Path "C:\inetpub\wwwroot" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null;
-                    }
-
-                    if (!(Test-Path -Path "C:\inetpub\wwwroot")) {
-                        New-Item -Path "C:\inetpub\wwwroot" -ItemType Directory -Force | Out-Null;
-                    }
-
-                    Invoke-WebRequest -Uri $using:websitePackageUri -OutFile $dest -UseBasicParsing;
-
-                    Expand-Archive -Path $dest -DestinationPath "C:\inetpub\wwwroot" -Force;
-                }
-                DependsOn  = "[WindowsFeature]WebServerRole"
-            }
-        }
+        }    
     }
 }

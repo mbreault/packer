@@ -9,7 +9,6 @@ variables:
   tenant_id: 'tenantID'
   subscription_id: 'subID'
   managed_image_resource_group_name: 'app1ResourceGroup'
-  PackageLocation: 'https://storageaccount.blob.core.windows.net/webapp/SampleApps.zip'
 steps:
 - powershell: |
    $tools="$env:build_sourcesdirectory\Packer"
@@ -26,7 +25,6 @@ steps:
 
     TargetFolder: '$(System.DefaultWorkingDirectory)'
 
-
 - task: PackerBuild@1
   displayName: 'Build immutable image'
   inputs:
@@ -34,7 +32,7 @@ steps:
 
     customTemplateLocation: Packer/packer.json
 
-    customTemplateParameters: '{"client_id":"$(client_id)","client_secret":"$(client_secret)","tenant_id":"$(tenant_id)","subscription_id":"$(subscription_id)","managed_image_prefix":"$(managed_image_prefix)","managed_image_resource_group_name":"$(managed_image_resource_group_name)","PackageLocation":"$(PackageLocation)"}'
+    customTemplateParameters: '{"client_id":"$(client_id)","client_secret":"$(client_secret)","tenant_id":"$(tenant_id)","subscription_id":"$(subscription_id)","managed_image_prefix":"$(managed_image_prefix)","managed_image_resource_group_name":"$(managed_image_resource_group_name)"}'
 
     imageUri: '$imageURL'
 
