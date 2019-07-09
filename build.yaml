@@ -29,6 +29,7 @@ steps:
 
     imageUri: '$imageURL'
 - powershell: |
-    Write-Host $tools
+    Write-Host $imageURL;
+    Write-Host $tools;
     displayName: 'Output test'
 
