@@ -2,13 +2,6 @@ resources:
 - repo: self
 queue:
   name: Hosted VS2017
-#Your build pipeline references a secret variable named ‘client_secret’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it secret. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references an undefined variable named ‘managed_image_prefix’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-variables:
-  client_id: 'clientID'
-  tenant_id: 'tenantID'
-  subscription_id: 'subID'
-  managed_image_resource_group_name: 'app1ResourceGroup'
 steps:
 - powershell: |
    $tools="$env:build_sourcesdirectory\Packer"
