@@ -1,1 +1,6 @@
 # Starter pipeline
+- task: PackerBuild@1
+  inputs:
+    templateType: 'custom'
+    customTemplateLocation: 'windows.json'
+    imageUri: 'buildStepImage'
