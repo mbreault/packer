@@ -28,7 +28,7 @@
             "winrm_insecure": "true",
             "winrm_timeout": "60m",
             "winrm_username": "packer",
-            "location": "US East",
+            "location": "eastus",
             "vm_size": "Standard_DS2",
             "async_resourcegroup_delete":true
         }
