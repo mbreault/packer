@@ -1,0 +1,41 @@
+{
+    "builders": [
+        {
+            "type": "azure-arm",
+            "client_id": "dd5de506-eb76-461b-b322-ed265acd17f9",
+            "client_secret": "4mf.DxW_b8WORx2luex]fSDuCfYP9:=o",
+            "tenant_id": "5230c49d-e018-4678-a28f-b255a73a21a1",
+            "subscription_id": "889acb63-3714-4edc-bfce-8f54f2c07c00",
+            "managed_image_resource_group_name": "emb-managed-image-rg",
+            "managed_image_name": "myPackerImage",
+            "os_type": "Windows",
+            "image_publisher": "MicrosoftWindowsServer",
+            "image_offer": "WindowsServer",
+            "image_sku": "2016-Datacenter",
+            "communicator": "winrm",
+            "winrm_use_ssl": true,
+            "winrm_insecure": true,
+            "winrm_timeout": "60m",
+            "winrm_username": "packer",
+            "azure_tags": {
+                "dept": "DevOps",
+                "task": "Packer image creation"
+            },
+            "location": "East US",
+            "vm_size": "Standard_DS2_v2"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "powershell",
+            "script": "C:\\Users\\brocom017\\git\\mbreault\\azure\\packer\\setup.ps1"
+        },
+        {
+            "type": "powershell",
+            "inline": [
+                "& $env:SystemRoot\\System32\\Sysprep\\Sysprep.exe /oobe /generalize /quiet /quit",
+                "while($true) { $imageState = Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\State | Select ImageState; if($imageState.ImageState -ne 'IMAGE_STATE_GENERALIZE_RESEAL_TO_OOBE') { Write-Output $imageState.ImageState; Start-Sleep -s 10  } else { break } }"
+            ]
+        }
+    ]
+}
