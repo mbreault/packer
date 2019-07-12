@@ -32,7 +32,7 @@ New-Item -ItemType Directory -Force -Path "C:\\Windows\\Temp\\HP_LJ_Pro_M402-M40
 7z.exe x $output -o"C:\\Windows\\Temp\\HP_LJ_Pro_M402-M403" -aoa
 
 ## Run the exe to install the driver
-Start-Process -FilePath "C:\\Windows\\Temp\\HP_LJ_Pro_M402-M403\\Installer\\DPInst_x64\\dpinst.exe" -Wait
+Start-Process -FilePath "C:\\Windows\\Temp\\HP_LJ_Pro_M402-M403\\Installer\\DPInst_x64\\dpinst.exe"
 
 
 
