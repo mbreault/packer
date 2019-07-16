@@ -24,13 +24,16 @@
             "image_offer": "WindowsServer",
             "image_sku": "2016-Datacenter",
             "communicator": "winrm",
-            "winrm_use_ssl": "true",
-            "winrm_insecure": "true",
+            "winrm_use_ssl": true,
+            "winrm_insecure": true,
             "winrm_timeout": "60m",
             "winrm_username": "packer",
-            "location": "eastus",
-            "vm_size": "Standard_DS2",
-            "async_resourcegroup_delete":true
+            "azure_tags": {
+                "dept": "DevOps",
+                "task": "Packer image creation"
+            },
+            "location": "East US",
+            "vm_size": "Standard_DS2_v2"
         }
     ],
     "provisioners": [
@@ -41,10 +44,6 @@
                 "Install-PackageProvider Nuget -ForceBootstrap -Force",
                 "Set-PSRepository -Name PSGallery -InstallationPolicy Trusted"
             ]
-        },
-        {
-            "type": "powershell",
-            "script": "setup.ps1"
         },
         {
             "type": "powershell",
