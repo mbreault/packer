@@ -38,6 +38,12 @@ New-Item -ItemType Directory -Force -Path "C:\\Windows\\Temp\\OJ6970"
 ## Run the MSI to install the driver
 msiexec.exe /i "C:\\Windows\\Temp\\OJ6970\\OJ697x64.msi" /qn /l*v "C:\\Windows\\Temp\\HPWia_OJ6970.log" ENTERPRISE=YES FAX=NO SCANTOPC=NO REBOOT=ReallySuppress
 
+## wait for MSI to finish
+Start-Sleep -s 15
+
 ## create an installed instance of the driver
 $driver = 'HP OfficeJet Pro 6970 PCL-3'
 Add-PrinterDriver -Name $driver
+
+## wait for all processes
+Start-Sleep -s 60
