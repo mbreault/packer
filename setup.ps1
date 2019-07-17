@@ -19,6 +19,10 @@ New-Item -ItemType Directory -Force -Path "C:\\Windows\\Temp\\HP_LJ_Pro_M402-M40
 ## Run the exe to install the driver
 Start-Process -FilePath "C:\\Windows\\Temp\\HP_LJ_Pro_M402-M403\\Installer\\DPInst_x64\\dpinst.exe" -Wait
 
+## create an installed instance of the driver
+$driver = 'HP LaserJet Pro M402-M403 PCL 6'
+Add-PrinterDriver -Name $driver
+
 ## HP OfficeJet Pro 6970
 ## Download the driver from HP
 $url = "https://ftp.hp.com/pub/softlib/software13/printers/OJ6970/OJ6970_Basicx64_40.12.1161.exe"
@@ -33,3 +37,7 @@ New-Item -ItemType Directory -Force -Path "C:\\Windows\\Temp\\OJ6970"
 
 ## Run the MSI to install the driver
 msiexec.exe /i "C:\\Windows\\Temp\\OJ6970\\OJ697x64.msi" /qn /l*v "C:\\Windows\\Temp\\HPWia_OJ6970.log" ENTERPRISE=YES FAX=NO SCANTOPC=NO REBOOT=ReallySuppress
+
+## create an installed instance of the driver
+$driver = 'HP OfficeJet Pro 6970 PCL-3'
+Add-PrinterDriver -Name $driver
